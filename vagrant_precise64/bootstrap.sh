@@ -12,7 +12,9 @@ apt-get update
 # Possible problem with grub?
 
 ## Install dependencies
-apt-get install -y gfortran cmake scons fftw3-dev flex libreadline-dev libcfitsio3 libcfitsio3-dev libxml2-dev libpng-dev libblas-dev liblapack-dev bison libboost-all-dev f2c zlib1g-dev subversion libfreetype6-dev make libncurses5-dev
+apt-get install -y gfortran cmake scons fftw3-dev flex libreadline-dev libcfitsio3 \
+libcfitsio3-dev libxml2-dev libpng-dev libblas-dev liblapack-dev bison libboost-all-dev \
+f2c zlib1g-dev subversion libfreetype6-dev make libncurses5-dev git
 
 ## wcs library
 cd
@@ -62,7 +64,8 @@ make
 make install
 
 ## Install Python dependencies
-apt-get install -y ipython python-matplotlib python-matplotlib-data python-pip python-pyfits python-numpy python-scipy python-virtualenv
+apt-get install -y ipython python-matplotlib python-matplotlib-data python-pip \
+python-pyfits python-numpy python-scipy python-virtualenv
 
 ## Install updated Python packages
 pip install --upgrade numpy

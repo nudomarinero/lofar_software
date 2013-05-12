@@ -10,4 +10,6 @@ At the moment we are testing the installation of the LOFAR software on Debian an
 Versions tested:
   * Ubuntu 12.04 LTS
   * Debian Wheezy
+  * Ubuntu 12.10
+
 
