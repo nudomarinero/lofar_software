@@ -84,9 +84,19 @@ python batchbuild.py
 
 ## casarest
 cd
-#svn co https://svn.astron.nl/casarest/trunk/casarest/
+svn co https://svn.astron.nl/casarest/trunk/casarest/
+cd casarest
 mkdir build; cd build
 cmake .. -DCASACORE_ROOT_DIR=/usr/local -DCMAKE_INSTALL_PREFIX=/usr/local \
          -DLIB_EXTRA_SYNTHESIS=gfortran -DBUILD_ALL=1
 make
+make install
+
+## Monetdb
+cp /vagrant/monetdb.list /etc/apt/sources.list.d/
+wget --output-document=- http://dev.monetdb.org/downloads/MonetDB-GPG-KEY | sudo apt-key add -
+apt-get update
+apt-get install monetdb5-sql monetdb-client
+usermod -a -G monetdb vagrant
+
 
