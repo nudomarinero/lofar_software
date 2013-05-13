@@ -63,5 +63,11 @@ svn co http://pyrap.googlecode.com/svn/tags/pyrap-1.1.0
 cd pyrap-1.1.0
 python batchbuild.py
 
-
+## casarest
+cd
+#svn co https://svn.astron.nl/casarest/trunk/casarest/
+mkdir build; cd build
+cmake .. -DCASACORE_ROOT_DIR=/usr/local -DCMAKE_INSTALL_PREFIX=/usr/local \
+         -DLIB_EXTRA_SYNTHESIS=gfortran -DBUILD_ALL=1
+make
 
