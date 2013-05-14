@@ -88,7 +88,7 @@ svn co https://svn.astron.nl/casarest/trunk/casarest/
 cd casarest
 mkdir build; cd build
 cmake .. -DCASACORE_ROOT_DIR=/usr/local -DCMAKE_INSTALL_PREFIX=/usr/local \
-         -DLIB_EXTRA_SYNTHESIS=gfortran -DBUILD_ALL=1
+          -DHDF5_ROOT_DIR=/usr/local/hdf5 -DLIB_EXTRA_SYNTHESIS=gfortran -DBUILD_ALL=1
 make
 make install
 
