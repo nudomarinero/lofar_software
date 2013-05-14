@@ -1,0 +1,3 @@
+deb http://dev.monetdb.org/downloads/deb/ precise monetdb
+deb-src http://dev.monetdb.org/downloads/deb/ precise monetdb
+
