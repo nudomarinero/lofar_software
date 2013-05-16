@@ -88,7 +88,7 @@ svn co https://svn.astron.nl/casarest/trunk/casarest/
 cd casarest
 mkdir build; cd build
 cmake .. -DCASACORE_ROOT_DIR=/usr/local -DCMAKE_INSTALL_PREFIX=/usr/local \
-          -DHDF5_ROOT_DIR=/usr/local/hdf5 -DLIB_EXTRA_SYNTHESIS=gfortran -DBUILD_ALL=1
+    -DHDF5_ROOT_DIR=/usr/local/hdf5 -DLIB_EXTRA_SYNTHESIS=gfortran -DBUILD_ALL=1
 make
 make install
 
@@ -96,7 +96,66 @@ make install
 cp /vagrant/monetdb.list /etc/apt/sources.list.d/
 wget --output-document=- http://dev.monetdb.org/downloads/MonetDB-GPG-KEY | sudo apt-key add -
 apt-get update
-apt-get install monetdb5-sql monetdb-client
+apt-get install -y monetdb5-sql monetdb-client
 usermod -a -G monetdb vagrant
+# Activate the database at startup
+cp /vagrant/monetdb5-sql /etc/default/monetdb5-sql
+# Activate the database now
+/etc/init.d/monetdb5-sql start
+
+
+## healpy
+# pip install --upgrade healpy
+
+## Casapy
+apt-get install -y libgsl0-dev xvfb
+cd
+wget https://svn.cv.nrao.edu/casa/linux_distro/stable/casapy-stable-41.0.23375-001-64b.tar.gz
+tar xfz casapy-stable-41.0.23375-001-64b.tar.gz
+cd casapy-stable-41.0.23375-001-64b
+mv casapy-stable-41.0.23375-001-64b /opt
+ln -s /opt/casapy-stable-41.0.23375-001-64b /opt/casa
+# export PATH=$PATH:/opt/casa
+
+
+#### LOFAR ####
+# liblog4cxx10-dev liblog4cpp5-dev
+# massif-visualizer?
+
+apt-get install -y valgrind libssh2-1-dev libblitz0-dev autogen libpqxx3-dev libpq-dev \
+libunittest++-dev 
+#apt-get install -y nvidia-cuda-dev
+# DAL
+
+# LOFAR
+cd
+svn co https://svn.astron.nl/LOFAR/trunk LOFAR
+cd LOFAR
+./CMake/gen_LofarPackageList_cmake.sh
+mkdir -p build/gnu_opt; cd build/gnu_opt
+mkdir /opt/LofIm
+export LD_LIBRARY_PATH=/usr/local/hdf5/lib:$LD_LIBRARY_PATH
+cmake ../.. -DBUILD_SHARED_LIBS=ON -DCMAKE_INSTALL_PREFIX=/opt/LofIm \
+      -DUSE_LOG4CPLUS=OFF -DHDF5_LIBRARIES=/usr/local/hdf5/lib/libhdf5.so \
+      -DHDF5_INCLUDE_DIRS=/usr/local/hdf5/include \
+      -DDAL_LIBRARY=/opt/DAL-2.0.32/lib -DDAL_INCLUDE_DIR=/opt/DAL-2.0.32/inc \
+      -DFFTW3_LIBRARIES=/usr/lib/ibfftw3f_threads.so\;/usr/lib/libfftw3_threads.so\;\
+/usr/lib/libfftw3f.so\;/usr/lib/libfftw3.so \
+      -DCASACORE_ROOT_DIR=/usr/local/ -DCASACORE_INCLUDE_DIR=/usr/local/include/casacore \
+      -DUSE_OPENMP=ON \
+      -DBUILD_PACKAGES=Offline\;LofarFT\;StaticMetaData\;SPW_Combine
+
+
+#MASS ???
+#gtkmm
+#sigc++
+#
+#option(BUILD_SHARED_LIBS        "Build shared libraries"      ON)
+#
+#set(CASACORE_ROOT_DIR /opt/cep/casacore)
+#set(CASAREST_ROOT_DIR /opt/cep/casarest)
+#set(DAL_ROOT_DIR /opt/cep/dal/current)
+
+
 
 
