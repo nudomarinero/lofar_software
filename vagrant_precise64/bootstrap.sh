@@ -139,12 +139,13 @@ cmake ../.. -DBUILD_SHARED_LIBS=ON -DCMAKE_INSTALL_PREFIX=/opt/LofIm \
       -DUSE_LOG4CPLUS=OFF -DHDF5_LIBRARIES=/usr/local/hdf5/lib/libhdf5.so \
       -DHDF5_INCLUDE_DIRS=/usr/local/hdf5/include \
       -DDAL_LIBRARY=/opt/DAL-2.0.32/lib -DDAL_INCLUDE_DIR=/opt/DAL-2.0.32/inc \
-      -DFFTW3_LIBRARIES=/usr/lib/ibfftw3f_threads.so\;/usr/lib/libfftw3_threads.so\;\
+      -DFFTW3_LIBRARIES=/usr/lib/libfftw3f_threads.so\;/usr/lib/libfftw3_threads.so\;\
 /usr/lib/libfftw3f.so\;/usr/lib/libfftw3.so \
       -DCASACORE_ROOT_DIR=/usr/local/ -DCASACORE_INCLUDE_DIR=/usr/local/include/casacore \
       -DUSE_OPENMP=ON \
       -DBUILD_PACKAGES=Offline\;LofarFT\;StaticMetaData\;SPW_Combine
-
+make
+make install
 
 #MASS ???
 #gtkmm

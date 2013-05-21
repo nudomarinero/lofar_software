@@ -17,17 +17,7 @@ libcfitsio3-dev libxml2-dev libpng-dev libblas-dev liblapack-dev bison libboost-
 f2c zlib1g-dev subversion libfreetype6-dev make libncurses5-dev git
 
 ## wcs library
-cd
-wget ftp://ftp.atnf.csiro.au/pub/software/wcslib/wcslib.tar.bz2
-tar xfj wcslib.tar.bz2
-cd wcslib-4.17
-./configure
-make
-mkdir -p /usr/local/share/man/man1
-make install
-cd ..
-#rm -rf wcslib-4.17
-#rm wcslib.tar.bz2
+apt-get install -y wcslib-dev
 
 ## hdf5
 apt-get install -y libhdf5-serial-dev 
@@ -39,7 +29,6 @@ svn co http://casacore.googlecode.com/svn/tags/casacore-1.5.0
 cd casacore-1.5.0
 patch -p1 < /vagrant/casacore.patch
 mkdir build; cd build
-#cmake .. -DUSE_HDF5=ON -DUSE_FFTW3=ON -DHDF5_ROOT_DIR=/usr/local/hdf5
 cmake .. -DUSE_HDF5=ON -DUSE_FFTW3=ON
 make
 make install

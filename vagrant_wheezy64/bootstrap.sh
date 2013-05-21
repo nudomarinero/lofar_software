@@ -18,17 +18,7 @@ liblapack-dev bison libboost-all-dev f2c zlib1g-dev subversion libfreetype6-dev 
 make libncurses5-dev git
 
 ## wcs library
-cd
-wget ftp://ftp.atnf.csiro.au/pub/software/wcslib/wcslib.tar.bz2
-tar xfj wcslib.tar.bz2
-cd wcslib-4.17
-./configure
-make
-mkdir -p /usr/local/share/man/man1
-make install
-cd ..
-#rm -rf wcslib-4.17
-#rm wcslib.tar.bz2
+apt-get install -y wcslib-dev
 
 ## hdf5
 #apt-get install -y libhdf5-openmpi-dev 
