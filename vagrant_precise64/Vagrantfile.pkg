@@ -1,0 +1,10 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant::Config.run do |config|
+    # Create the box with:
+    # vagrant package --vagrantfile Vagrantfile.pkg
+
+    # Forward ipython ports
+    config.vm.forward_port 8888, 8888
+end
