@@ -129,7 +129,8 @@ libunittest++-dev
 
 # LOFAR
 cd
-svn co https://svn.astron.nl/LOFAR/trunk LOFAR
+#svn co https://svn.astron.nl/LOFAR/trunk LOFAR
+cp -r /vagrant/LOFAR .
 cd LOFAR
 ./CMake/gen_LofarPackageList_cmake.sh
 mkdir -p build/gnu_opt; cd build/gnu_opt
@@ -147,16 +148,16 @@ cmake ../.. -DBUILD_SHARED_LIBS=ON -DCMAKE_INSTALL_PREFIX=/opt/LofIm \
 make
 make install
 
-#MASS ???
-#gtkmm
-#sigc++
-#
-#option(BUILD_SHARED_LIBS        "Build shared libraries"      ON)
-#
-#set(CASACORE_ROOT_DIR /opt/cep/casacore)
-#set(CASAREST_ROOT_DIR /opt/cep/casarest)
-#set(DAL_ROOT_DIR /opt/cep/dal/current)
+# Update configuration files
+cat /vagrant/bashrc >> /home/vagrant/.bashrc
+cp /vagrant/casarc /home/vagrant/.casarc
 
-
-
+# Clean
+# Manually at the moment
+#rm -r casarest casacore-1.5.0 hdf5-1.8.10-patch1 LOFAR pyrap-1.1.0
+#rm -r wcslib-4.17 
+#rm casapy-stable-41.0.23375-001-64b.tar.gz
+#rm hdf5-1.8.10-patch1.tar.gz
+#rm wcslib.tar.bz2
+#rm -r wcslib-4.17 
 
