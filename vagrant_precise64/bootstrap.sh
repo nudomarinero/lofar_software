@@ -62,6 +62,7 @@ mkdir build; cd build
 cmake .. -DUSE_HDF5=ON -DUSE_FFTW3=ON -DHDF5_ROOT_DIR=/usr/local/hdf5
 make
 make install
+cd
 
 ## Install Python dependencies
 apt-get install -y ipython python-matplotlib python-matplotlib-data python-pip \
@@ -119,15 +120,23 @@ ln -s /opt/casapy-stable-41.0.23375-001-64b /opt/casa
 
 
 #### LOFAR ####
+## Dependencies
 # liblog4cxx10-dev liblog4cpp5-dev
 # massif-visualizer?
-
 apt-get install -y valgrind libssh2-1-dev libblitz0-dev autogen libpqxx3-dev libpq-dev \
 libunittest++-dev 
-#apt-get install -y nvidia-cuda-dev
-# DAL
 
-# LOFAR
+#apt-get install -y nvidia-cuda-dev
+
+## DAL
+cd
+#wget --trust-server-name http://downloads.sourceforge.net/project/dall/src/DAL-2.0.32.src.tar.gz\?r=http%3A%2F%2Fsourceforge.net%2Fprojects%2Fdall%2Ffiles%2Fsrc%2F\&ts=1369948556\&use_mirror=switch
+wget --trust-server-name http://downloads.sourceforge.net/project/dall/DAL-2.0.32.tar.gz\?r=http%3A%2F%2Fsourceforge.net%2Fprojects%2Fdall%2Ffiles%2F%3Fsource%3Dnavbar\&ts=1369948918\&use_mirror=switch
+tar xfz DAL-2.0.32.tar.gz
+mv DAL-2.0.32 /opt
+
+
+## LOFAR
 cd
 #svn co https://svn.astron.nl/LOFAR/trunk LOFAR
 cp -r /vagrant/LOFAR .
@@ -148,11 +157,11 @@ cmake ../.. -DBUILD_SHARED_LIBS=ON -DCMAKE_INSTALL_PREFIX=/opt/LofIm \
 make
 make install
 
-# Update configuration files
+## Update configuration files
 cat /vagrant/bashrc >> /home/vagrant/.bashrc
 cp /vagrant/casarc /home/vagrant/.casarc
 
-# Clean
+## Clean
 # Manually at the moment
 #rm -r casarest casacore-1.5.0 hdf5-1.8.10-patch1 LOFAR pyrap-1.1.0
 #rm -r wcslib-4.17 
