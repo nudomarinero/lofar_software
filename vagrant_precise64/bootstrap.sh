@@ -125,7 +125,6 @@ wget --trust-server-name http://downloads.sourceforge.net/project/dall/DAL-2.0.3
 tar xfz DAL-2.0.32.tar.gz
 mv DAL-2.0.32 /opt
 
-
 ## LOFAR
 cd
 #svn co https://svn.astron.nl/LOFAR/trunk LOFAR
@@ -150,13 +149,25 @@ make install
 ## Update configuration files
 cat /vagrant/bashrc >> /home/vagrant/.bashrc
 cp /vagrant/casarc /home/vagrant/.casarc
+chown vagrant:vagrant /home/vagrant/.casarc
+
+
+### Before packaging
+# Manually at the moment
 
 ## Clean
-# Manually at the moment
 #rm -r casarest casacore-1.5.0 hdf5-1.8.10-patch1 LOFAR pyrap-1.1.0
 #rm -r wcslib-4.17 
 #rm casapy-stable-41.0.23375-001-64b.tar.gz
 #rm hdf5-1.8.10-patch1.tar.gz
 #rm wcslib.tar.bz2
 #rm -r wcslib-4.17 
+
+## Upgrade
+# apt-get update
+# apt-get upgrade -y
+# Problem with grub. Manually select the first partition
+
+## Clean cache
+# apt-get clean
 

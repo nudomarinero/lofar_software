@@ -66,14 +66,14 @@ cmake .. -DCASACORE_ROOT_DIR=/usr/local -DCMAKE_INSTALL_PREFIX=/usr/local \
 make
 make install
 
-## Monetdb
+## Monetdb * Not packaged
 #cp /vagrant/monetdb.list /etc/apt/sources.list.d/
 #wget --output-document=- http://dev.monetdb.org/downloads/MonetDB-GPG-KEY | sudo apt-key add -
 #apt-get update
 #apt-get install monetdb5-sql monetdb-client
 #usermod -a -G monetdb vagrant
 
-## healpy
+## healpy * Errors
 # pip install --upgrade healpy
 
 ## Casapy
@@ -121,6 +121,7 @@ make install
 ## Update configuration files
 cat /vagrant/bashrc >> /home/vagrant/.bashrc
 cp /vagrant/casarc /home/vagrant/.casarc
+chown vagrant:vagrant /home/vagrant/.casarc
 
 ## Clean
 # Manually at the moment
