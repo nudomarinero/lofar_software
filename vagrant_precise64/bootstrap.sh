@@ -129,7 +129,8 @@ libunittest++-dev
 
 # LOFAR
 cd
-svn co https://svn.astron.nl/LOFAR/trunk LOFAR
+#svn co https://svn.astron.nl/LOFAR/trunk LOFAR
+cp -r /vagrant/LOFAR .
 cd LOFAR
 ./CMake/gen_LofarPackageList_cmake.sh
 mkdir -p build/gnu_opt; cd build/gnu_opt
@@ -147,16 +148,9 @@ cmake ../.. -DBUILD_SHARED_LIBS=ON -DCMAKE_INSTALL_PREFIX=/opt/LofIm \
 make
 make install
 
-#MASS ???
-#gtkmm
-#sigc++
-#
-#option(BUILD_SHARED_LIBS        "Build shared libraries"      ON)
-#
-#set(CASACORE_ROOT_DIR /opt/cep/casacore)
-#set(CASAREST_ROOT_DIR /opt/cep/casarest)
-#set(DAL_ROOT_DIR /opt/cep/dal/current)
+# Update configuration files
 
 
-
+# Clean
+# Manually at the moment
 
