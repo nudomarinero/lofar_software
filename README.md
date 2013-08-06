@@ -12,6 +12,8 @@ Versions tested:
   * Debian Wheezy (not working yet)
   * Ubuntu 12.10 (not working yet)
 
+**Note 2013-08-06: The automatic compilation of the LOFAR software is not working anymore.**
+
 Creation of the Virtual Machine
 -------------------------------
 

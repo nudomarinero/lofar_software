@@ -103,7 +103,7 @@ apt-get install -y libgsl0-dev xvfb
 cd
 wget https://svn.cv.nrao.edu/casa/linux_distro/stable/casapy-stable-41.0.23375-001-64b.tar.gz
 tar xfz casapy-stable-41.0.23375-001-64b.tar.gz
-cd casapy-stable-41.0.23375-001-64b
+#cd casapy-stable-41.0.23375-001-64b
 mv casapy-stable-41.0.23375-001-64b /opt
 ln -s /opt/casapy-stable-41.0.23375-001-64b /opt/casa
 # export PATH=$PATH:/opt/casa
@@ -119,6 +119,7 @@ libunittest++-dev
 #apt-get install -y nvidia-cuda-dev
 
 ## DAL
+## Change! see https://github.com/nextgen-astrodata/DAL
 cd
 #wget --trust-server-name http://downloads.sourceforge.net/project/dall/src/DAL-2.0.32.src.tar.gz\?r=http%3A%2F%2Fsourceforge.net%2Fprojects%2Fdall%2Ffiles%2Fsrc%2F\&ts=1369948556\&use_mirror=switch
 wget --trust-server-name http://downloads.sourceforge.net/project/dall/DAL-2.0.32.tar.gz\?r=http%3A%2F%2Fsourceforge.net%2Fprojects%2Fdall%2Ffiles%2F%3Fsource%3Dnavbar\&ts=1369948918\&use_mirror=switch
@@ -129,15 +130,15 @@ mv DAL-2.0.32 /opt
 cd
 #svn co https://svn.astron.nl/LOFAR/trunk LOFAR
 cp -r /vagrant/LOFAR .
-cd LOFAR
-./CMake/gen_LofarPackageList_cmake.sh
+cd LOFAR/CMake
+./gen_LofarPackageList_cmake.sh
+cd ..
 mkdir -p build/gnu_opt; cd build/gnu_opt
 mkdir /opt/LofIm
 export LD_LIBRARY_PATH=/usr/local/hdf5/lib:$LD_LIBRARY_PATH
 cmake ../.. -DBUILD_SHARED_LIBS=ON -DCMAKE_INSTALL_PREFIX=/opt/LofIm \
       -DUSE_LOG4CPLUS=OFF -DHDF5_LIBRARIES=/usr/local/hdf5/lib/libhdf5.so \
       -DHDF5_INCLUDE_DIRS=/usr/local/hdf5/include \
-      -DDAL_LIBRARY=/opt/DAL-2.0.32/lib -DDAL_INCLUDE_DIR=/opt/DAL-2.0.32/inc \
       -DFFTW3_LIBRARIES=/usr/lib/libfftw3f_threads.so\;/usr/lib/libfftw3_threads.so\;\
 /usr/lib/libfftw3f.so\;/usr/lib/libfftw3.so \
       -DCASACORE_ROOT_DIR=/usr/local/ -DCASACORE_INCLUDE_DIR=/usr/local/include/casacore \
