@@ -15,15 +15,15 @@ apt-get update
 ## Install dependencies
 apt-get install -y gfortran cmake scons fftw3-dev flex libreadline-dev libcfitsio3 \
 libcfitsio3-dev libxml2-dev libpng-dev libblas-dev liblapack-dev bison libboost-all-dev \
-f2c zlib1g-dev subversion libfreetype6-dev make libncurses5-dev git
+f2c zlib1g-dev subversion libfreetype6-dev make libncurses5-dev git libatlas-base-dev
 
 ## wcs library
 apt-get install -y wcslib-dev
 
 ## hdf5 (from source)
-wget http://www.hdfgroup.org/ftp/HDF5/current/src/hdf5-1.8.10-patch1.tar.gz
-tar xfz hdf5-1.8.10-patch1.tar.gz
-cd hdf5-1.8.10-patch1
+wget http://www.hdfgroup.org/ftp/HDF5/releases/hdf5-1.8.11/src/hdf5-1.8.11.tar.gz
+tar xfz hdf5-1.8.11.tar.gz
+cd hdf5-1.8.11
 mkdir build; cd build
 # parallel
 
