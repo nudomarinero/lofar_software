@@ -9,7 +9,8 @@ apt-get update
 
 ## Upgrade
 # apt-get upgrade -y
-# Possible problem with grub?
+# NOTE: Possible problem with grub?
+# NOTE: Manual upgrade at the end
 
 ## Install dependencies
 apt-get install -y gfortran cmake scons fftw3-dev flex libreadline-dev libcfitsio3 \
@@ -19,9 +20,7 @@ f2c zlib1g-dev subversion libfreetype6-dev make libncurses5-dev git
 ## wcs library
 apt-get install -y wcslib-dev
 
-## hdf5
-#apt-get install -y libhdf5-openmpi-dev 
-#apt-get install -y openmpi-bin libopenmpi-dev 
+## hdf5 (from source)
 wget http://www.hdfgroup.org/ftp/HDF5/current/src/hdf5-1.8.10-patch1.tar.gz
 tar xfz hdf5-1.8.10-patch1.tar.gz
 cd hdf5-1.8.10-patch1
@@ -49,7 +48,9 @@ cd
 svn co http://casacore.googlecode.com/svn/tags/casacore-1.5.0
 cd casacore-1.5.0
 mkdir build; cd build
-cmake .. -DUSE_HDF5=ON -DUSE_FFTW3=ON -DHDF5_ROOT_DIR=/usr/local/hdf5
+cmake .. -DUSE_HDF5=ON -DUSE_FFTW3=ON \
+ -DHDF5_LIBRARIES=/usr/local/hdf5/lib/libhdf5.so \
+ -DHDF5_INCLUDE_DIRS=/usr/local/hdf5/include 
 make
 make install
 cd
@@ -97,13 +98,13 @@ cp /vagrant/monetdb5-sql /etc/default/monetdb5-sql
 
 ## healpy
 # pip install --upgrade healpy
+# NOTE: Error raised
 
 ## Casapy
 apt-get install -y libgsl0-dev xvfb
 cd
 wget https://svn.cv.nrao.edu/casa/linux_distro/stable/casapy-stable-41.0.23375-001-64b.tar.gz
 tar xfz casapy-stable-41.0.23375-001-64b.tar.gz
-#cd casapy-stable-41.0.23375-001-64b
 mv casapy-stable-41.0.23375-001-64b /opt
 ln -s /opt/casapy-stable-41.0.23375-001-64b /opt/casa
 # export PATH=$PATH:/opt/casa
@@ -112,10 +113,9 @@ ln -s /opt/casapy-stable-41.0.23375-001-64b /opt/casa
 #### LOFAR ####
 ## Dependencies
 # liblog4cxx10-dev liblog4cpp5-dev
-# massif-visualizer?
+# NOTE: massif-visualizer required?
 apt-get install -y valgrind libssh2-1-dev libblitz0-dev autogen libpqxx3-dev libpq-dev \
 libunittest++-dev 
-
 #apt-get install -y nvidia-cuda-dev
 
 ## DAL
