@@ -152,17 +152,19 @@ cat /vagrant/bashrc >> /home/vagrant/.bashrc
 cp /vagrant/casarc /home/vagrant/.casarc
 chown vagrant:vagrant /home/vagrant/.casarc
 
+##Optionally install ipython-notebook and qtconsole
+#apt-get install -y ipython-notebook ipython-qtconsole
+#pip install --upgrade ipython
 
 ### Before packaging
 # Manually at the moment
 
 ## Clean
-#rm -r casarest casacore-1.5.0 hdf5-1.8.10-patch1 LOFAR pyrap-1.1.0
-#rm -r wcslib-4.17 
+#rm -r casarest casacore-1.5.0 hdf5-1.8.11 LOFAR pyrap-1.1.0
 #rm casapy-stable-41.0.23375-001-64b.tar.gz
-#rm hdf5-1.8.10-patch1.tar.gz
-#rm wcslib.tar.bz2
-#rm -r wcslib-4.17 
+#rm hdf5-1.8.11.tar.gz
+#rm DAL-2.0.32.tar.gz
+
 
 ## Upgrade
 # apt-get update
