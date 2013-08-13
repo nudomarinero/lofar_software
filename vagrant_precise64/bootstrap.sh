@@ -154,7 +154,7 @@ chown vagrant:vagrant /home/vagrant/.casarc
 
 
 ### Before packaging
-# Manually at the moment
+## Manually at the moment
 
 ## Clean
 #rm -r casarest casacore-1.5.0 hdf5-1.8.10-patch1 LOFAR pyrap-1.1.0
@@ -167,7 +167,10 @@ chown vagrant:vagrant /home/vagrant/.casarc
 ## Upgrade
 # apt-get update
 # apt-get upgrade -y
-# Problem with grub. Manually select the first partition
+## Problem with grub. Manually select the first partition
+
+## Upload the VirtualBox kernel modules
+# /etc/init.d/vboxadd setup
 
 ## Clean cache
 # apt-get clean
