@@ -15,10 +15,9 @@ Versions tested:
 Creation of the Virtual Machine
 -------------------------------
 
-The first step is the creation of the base Virtual Machine (VM):
+The first step is to enter the directory of our selected Virtual Machine (VM):
 ```
 cd vagrant_precise64
-vagrant init
 ```
 
 We need to check out the LOFAR software to the base directory using our credentials:
