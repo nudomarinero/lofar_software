@@ -17,7 +17,7 @@ rpm -Uvh http://dl.fedoraproject.org/pub/epel/5/i386/epel-release-5-4.noarch.rpm
 #f2c zlib1g-dev subversion libfreetype6-dev make libncurses5-dev git libatlas-base-dev
 
 yum -y install boost-devel.x86_64 cmake.x86_64 \
-    scons.noarch readline-devel.x86_64 libxml2-devel.x86_64 \
+    readline-devel.x86_64 libxml2-devel.x86_64 \
     hdf5-devel.x86_64 libpng-devel.x86_64 blas-devel.x86_64 \
     lapack-devel.x86_64 compat-libf2c-34.x86_64 ncurses-devel.x86_64 \
     freetype-devel.x86_64 atlas-c++-devel.x86_64 cmake.x86_64 \
@@ -27,7 +27,8 @@ yum -y install boost-devel.x86_64 cmake.x86_64 \
 
 
 yum -y install fftw3-devel.x86_64 cfitsio-devel.x86_64 \
-    libwcs-devel.x86_64 zeromq-devel.x86_64
+    libwcs-devel.x86_64 zeromq-devel.x86_64 \
+    boost141-devel.x86_64
 
 
 ## Python
@@ -40,7 +41,7 @@ unset PYTHONHOME
 make
 make install
 export LD_LIBRARY_PATH=/usr/local/lib
-
+export PYTHONPATH=/usr/local/lib/python2.7/site-packages
 
 ## Update paths
 /usr/bin/install -c -m 644 /vagrant/local_profile.csh /etc/profile.d/local.csh
@@ -74,10 +75,47 @@ svn co http://casacore.googlecode.com/svn/tags/casacore-1.5.0
 cd casacore-1.5.0
 mkdir build; cd build
 cmake .. -DUSE_HDF5=ON -DUSE_FFTW3=ON
+make
+make install
+
+## scons
+cd
+wget http://prdownloads.sourceforge.net/scons/scons-2.3.0.tar.gz
+tar xfz scons-2.3.0.tar.gz
+cd scons-2.3.0
+python setup.py install
+
+## boost
+cd
+wget http://prdownloads.sourceforge.net/boost/boost/1.54.0/boost_1_54_0.tar.gz
+tar xvfz boost_1_54_0.tar.gz
+cd boost_1_54_0
+./bootstrap.sh
+./b2 link=shared
+./b2 install
 
 ## pyrap
+cd
+svn co http://pyrap.googlecode.com/svn/tags/pyrap-1.1.0
+cd pyrap-1.1.0
+python batchbuild.py --python-prefix=/usr/local/lib \
+--numpy-incdir=/usr/local/lib/python2.7/site-packages/numpy/core/include
+python batchbuild.py --numpy-incdir=/usr/local/lib/python2.7/site-packages/numpy/core/include
 
 ## casarest
+cd
+svn co https://svn.astron.nl/casarest/trunk/casarest/
+cd casarest
+mkdir build; cd build
+cmake .. -DBOOST_ROOT=/usr/local -DBUILD_ALL=1
+make
+make install
+
+## ds9
+cd
+wget http://hea-www.harvard.edu/RD/ds9/download/linux64/ds9.linux64.7.2.tar.gz
+tar zxf ds9.linux64.7.2.tar.gz
+mv ds9 /usr/local/bin
 
 ## Casapy
 
