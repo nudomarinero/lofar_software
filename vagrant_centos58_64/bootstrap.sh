@@ -124,10 +124,29 @@ mv ds9 /usr/local/bin
 # libunittest++-dev
 #apt-get install -y nvidia-cuda-dev
 
-## DAL ?
+## log4cplus
+cd 
+wget http://prdownloads.sourceforge.net/log4cplus/log4cplus-stable/1.1.1/log4cplus-1.1.1.tar.gz
+tar xvfz log4cplus-1.1.1.tar.gz
+cd log4cplus-1.1.1
+./configure
+make
+make install
 
 ## LOFAR
+cd
+cp -r /vagrant/LOFAR .
+cd LOFAR
+mkdir -p build/gnu_opt; cd build/gnu_opt
+mkdir /opt/LofIm
+cmake ../.. -DBUILD_SHARED_LIBS=ON -DCMAKE_INSTALL_PREFIX=/opt/LofIm \
+  -DPYTHON_INCLUDE_PATH=/usr/local/include \
+  -DPYTHON_EXECUTABLE:FILEPATH=/usr/local/bin/python \
+  -DF2PY_FCOMPILER=gnu95 \
+  -DBUILD_PACKAGES=Offline\;LofarFT\;StaticMetaData\;SPW_Combine
+make
 
+  
 
 # TODO: Check if the following lines work
 /usr/bin/install -c -m 644 /vagrant/lofar_ld_so_conf /etc/ld.so.conf.d/lofar.conf
