@@ -101,6 +101,7 @@ mkdir /opt/LofIm
 export LD_LIBRARY_PATH=/usr/local/hdf5/lib:$LD_LIBRARY_PATH
 cmake ../.. -DBUILD_SHARED_LIBS=ON -DCMAKE_INSTALL_PREFIX=/opt/LofIm \
     -DUSE_OPENMP=ON \
+    -DF2PY_FCOMPILER=gnu95 \
     -DBUILD_PACKAGES=Offline\;LofarFT\;StaticMetaData\;SPW_Combine
 make
 make install
