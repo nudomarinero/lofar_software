@@ -23,7 +23,7 @@ apt-get install -y wcslib-dev
 ## hdf5
 apt-add-repository -y ppa:jsm-8/lofar-deps
 apt-get update
-apt-get install hdf5-tools libhdf5-dev libhdf5-serial-dev
+apt-get install -y hdf5-tools libhdf5-dev libhdf5-serial-dev
 
 ## Casacore
 cd
