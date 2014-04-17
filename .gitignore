@@ -21,3 +21,10 @@ doc/
 # Python
 *.pyc
 
+# LOFAR svn
+.svn
+.subversion
+LOFAR*
+
+# Assorted
+log.txt
