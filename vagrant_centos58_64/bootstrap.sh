@@ -4,12 +4,16 @@
 ###################
 
 ## Update
-yum check-update
-## Upgrade (-y option?)
+# yum check-update
+## Upgrade
 yum -y upgrade
 
 ## Add EPEL repository
 rpm -Uvh http://dl.fedoraproject.org/pub/epel/5/i386/epel-release-5-4.noarch.rpm
+yum -y upgrade
+yum -y install kernel-devel-2.6.18-371.1.2.el5
+
+# Needed steps to rebuild the VirtualBox Guest Additions
 
 ## Install dependencies
 #apt-get install -y gfortran cmake scons fftw3-dev flex libreadline-dev libcfitsio3 \
@@ -27,8 +31,7 @@ yum -y install boost-devel.x86_64 cmake.x86_64 \
 
 
 yum -y install fftw3-devel.x86_64 cfitsio-devel.x86_64 \
-    libwcs-devel.x86_64 zeromq-devel.x86_64 \
-    boost141-devel.x86_64
+    libwcs-devel.x86_64 zeromq-devel.x86_64
 
 
 ## Python
