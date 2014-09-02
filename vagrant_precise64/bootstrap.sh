@@ -56,7 +56,7 @@ python batchbuild.py
 
 ## casarest
 cd
-svn co https://svn.astron.nl/casarest/trunk/casarest/
+svn co -r 8758 https://svn.astron.nl/casarest/trunk/casarest/
 cd casarest
 mkdir build; cd build
 cmake .. -DCASACORE_ROOT_DIR=/usr/local -DCMAKE_INSTALL_PREFIX=/usr/local \
@@ -73,10 +73,11 @@ make install
 ## Casapy
 apt-get install -y libgsl0-dev xvfb
 cd
-wget https://svn.cv.nrao.edu/casa/linux_distro/stable/casapy-stable-41.0.23375-001-64b.tar.gz
-tar xfz casapy-stable-41.0.23375-001-64b.tar.gz
-mv casapy-stable-41.0.23375-001-64b /opt
-ln -s /opt/casapy-stable-41.0.23375-001-64b /opt/casa
+CASAPY_VERSION=42.1.29047-001-1
+wget https://svn.cv.nrao.edu/casa/linux_distro/casapy-${CASAPY_VERSION}-64b.tar.gz
+tar xfz casapy-${CASAPY_VERSION}-64b.tar.gz
+mv casapy-${CASAPY_VERSION}-64b /opt
+ln -s /opt/casapy-${CASAPY_VERSION}-64b /opt/casa
 # export PATH=$PATH:/opt/casa
 
 
@@ -113,7 +114,14 @@ chown vagrant:vagrant /home/vagrant/.casarc
 
 ##Optionally install ipython-notebook and qtconsole
 #apt-get install -y ipython-notebook ipython-qtconsole
-#pip install --upgrade ipython
+#pip install --upgrade ipython[all]
+
+# LOSOTO
+#apt-get install -y liblzo2-dev
+#pip install --upgrade cython
+#pip install --upgrade numexpr
+#pip install --upgrade tables
+#pip install --upgrade pandas
 
 ### Before packaging
 ## Manually at the moment
