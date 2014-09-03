@@ -13,10 +13,11 @@ apt-get install -y gfortran cmake scons fftw3-dev flex libreadline-dev libcfitsi
 libcfitsio3-dev libxml2-dev libpng-dev libblas-dev liblapack-dev bison libboost-all-dev \
 f2c zlib1g-dev subversion libfreetype6-dev make libncurses5-dev git libatlas-base-dev \
 wcslib-dev hdf5-tools libhdf5-dev libhdf5-serial-dev build-essential libzmq-dev \
-liblzo2-dev
+liblzo2-dev valgrind libssh2-1-dev libblitz0-dev autogen libpqxx3-dev libpq-dev \
+libunittest++-dev liblog4cplus-dev libgsl0-dev xvfb
 
 ## Casacore
-apt-add-repository -y ppa:jsm-8/lofar-dependencies
+apt-add-repository -y ppa:jsm-8/lofar-deps
 apt-get update
 apt-get install -y casacore libcasacore-dev
 
