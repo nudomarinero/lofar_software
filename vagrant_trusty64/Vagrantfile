@@ -14,7 +14,7 @@ Vagrant::Config.run do |config|
   config.vm.box_url = "https://cloud-images.ubuntu.com/vagrant/trusty/current/trusty-server-cloudimg-amd64-vagrant-disk1.box"
 
   # Increase the memory
-  config.vm.customize ["modifyvm", :id, "--memory", 1024]
+  config.vm.customize ["modifyvm", :id, "--memory", 2048]
   
   # Boot with a GUI so you can see the screen. (Default is headless)
   # config.vm.boot_mode = :gui
