@@ -64,5 +64,20 @@ apt-get install -y casarest libcasarest-dev
 apt-get install -y casacore-data
 
 ## LOFAR
+cd
+svn co --username "lofar" --password "M_OKZZJBTNuI" --non-interactive https://svn.astron.nl/LOFAR/trunk LOFAR
+cd LOFAR
+mkdir -p build/gnu_opt; cd build/gnu_opt
+mkdir /opt/LofIm
+cmake ../.. -DBUILD_SHARED_LIBS=ON \
+    -DCMAKE_INSTALL_PREFIX=/opt/LofIm \
+    -DUSE_OPENMP=ON \
+    -DF2PY_FCOMPILER=gnu95 \
+    -DBUILD_PACKAGES=Offline
+make
+make install
+cd
+rm -rf LOFAR
+
 
 ## Update configuration files
