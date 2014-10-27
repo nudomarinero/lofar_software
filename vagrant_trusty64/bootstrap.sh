@@ -16,12 +16,6 @@ wcslib-dev hdf5-tools libhdf5-dev libhdf5-serial-dev build-essential libzmq-dev 
 liblzo2-dev valgrind libssh2-1-dev libblitz0-dev autogen libpqxx3-dev libpq-dev \
 libunittest++-dev liblog4cplus-dev libgsl0-dev xvfb
 
-## Casacore
-apt-add-repository -y ppa:jsm-8/lofar-deps
-apt-get update
-apt-get install -y casacore libcasacore-dev
-
-
 # ## Install Python packages
 apt-get install -y ipython python-matplotlib python-matplotlib-data python-pip \
 python-pyfits python-numpy python-scipy python-virtualenv python-sphinx \
@@ -54,14 +48,10 @@ ipython-notebook ipython-qtconsole
 # pip install --upgrade pandas
 # pip install --upgrade ipython
 
-## pyrap
-apt-get install -y python-pyrap
-
-## casarest
-apt-get install -y casarest libcasarest-dev
-
-## Casapy or casacore-data
-apt-get install -y casacore-data
+## Casacore and more
+apt-add-repository -y ppa:ska-sa/main
+apt-get update
+apt-get install -y python-pyrap casacore libcasacore-dev casacore-data lwimager
 
 ## LOFAR
 cd
@@ -81,3 +71,4 @@ rm -rf LOFAR
 
 
 ## Update configuration files
+cat /vagrant/bashrc >> /home/vagrant/.bashrc
