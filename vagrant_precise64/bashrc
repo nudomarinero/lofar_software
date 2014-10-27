@@ -3,22 +3,6 @@
 # PATH
 export PATH=/opt/LofIm/bin:/opt/casa/bin:$PATH
 
-export LD_LIBRARY_PATH=/usr/local/hdf5/lib:$LD_LIBRARY_PATH
-
 . /opt/LofIm/lofarinit.sh
 
-### From CEP
-# don't put duplicate lines in the history. See bash(1) for more options
-export HISTCONTROL="ignoredups:erasedups"
-
-# Avoid "No xauth data" in cexec 
-export C3_RSH="ssh -x -o StrictHostKeyChecking=no"
-
-##
-#export DEFAULT_PYTHON_VERSION=`python --version 2>&1 | cut -c8-10`
-#export LANG=en_GB.UTF-8
-# This is to prevent error message: /bin/bash: lessopen.sh: command not 
-# found
-#export LESSOPEN=""
-###
 

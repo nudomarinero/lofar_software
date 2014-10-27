@@ -6,141 +6,70 @@
 
 ## Update
 apt-get update
-
 ## Upgrade
-# apt-get upgrade -y
-# NOTE: Possible problem with grub?
-# NOTE: Manual upgrade at the end
+DEBIAN_FRONTEND=noninteractive apt-get upgrade -y
 
 ## Install dependencies
 apt-get install -y gfortran cmake scons fftw3-dev flex libreadline-dev libcfitsio3 \
 libcfitsio3-dev libxml2-dev libpng-dev libblas-dev liblapack-dev bison libboost-all-dev \
-f2c zlib1g-dev subversion libfreetype6-dev make libncurses5-dev git libatlas-base-dev
+f2c zlib1g-dev subversion libfreetype6-dev make libncurses5-dev git libatlas-base-dev \
+wcslib-dev python-software-properties software-properties-common hdf5-tools \
+libhdf5-serial-dev
 
-## wcs library
-apt-get install -y wcslib-dev
 
-## hdf5
-apt-add-repository -y ppa:jsm-8/lofar-deps
+## ska repo
+apt-add-repository -y ppa:ska-sa/main
 apt-get update
-apt-get install -y hdf5-tools libhdf5-dev libhdf5-serial-dev
-
-## Casacore
-cd
-svn co http://casacore.googlecode.com/svn/tags/casacore-1.5.0
-cd casacore-1.5.0
-mkdir build; cd build
-cmake .. -DUSE_HDF5=ON -DUSE_FFTW3=ON
-make
-make install
-cd
+apt-get install -y python-pyrap casacore libcasacore-dev casacore-data lwimager
 
 ## Install Python dependencies
+# ## Install Python packages
 apt-get install -y ipython python-matplotlib python-matplotlib-data python-pip \
-python-pyfits python-numpy python-scipy python-virtualenv
+python-pyfits python-numpy python-scipy python-virtualenv python-sphinx \
+python-pygments python-jinja2 python-nose python-tornado cython python-zmq \
+python-pywcs python-numexpr python-tables python-pandas \
+ipython-notebook ipython-qtconsole
+# apt-get install -y ipython python-matplotlib python-matplotlib-data python-pip \
+# python-pyfits python-numpy python-scipy python-virtualenv
 
 ## Install updated Python packages
-pip install --upgrade numpy
-pip install --upgrade scipy
-pip install --upgrade pyfits
-pip install --upgrade matplotlib
+#pip install --upgrade numpy
+#pip install --upgrade scipy
+#pip install --upgrade pyfits
+#pip install --upgrade matplotlib
 
 ## pywcs
-pip install --upgrade pywcs
+#pip install --upgrade pywcs
 
-## pyrap
-cd
-svn co http://pyrap.googlecode.com/svn/tags/pyrap-1.1.0
-cd pyrap-1.1.0
-python batchbuild.py
-
-## casarest
-cd
-svn co -r 8758 https://svn.astron.nl/casarest/trunk/casarest/
-cd casarest
-mkdir build; cd build
-cmake .. -DCASACORE_ROOT_DIR=/usr/local -DCMAKE_INSTALL_PREFIX=/usr/local \
-         -DLIB_EXTRA_SYNTHESIS=gfortran -DBUILD_ALL=1
-make
-make install
-
-## Monetdb (temporally disabled)
-
-## healpy
-# pip install --upgrade healpy
-# NOTE: Error raised
 
 ## Casapy
-apt-get install -y libgsl0-dev xvfb
-cd
-CASAPY_VERSION=42.1.29047-001-1
-wget https://svn.cv.nrao.edu/casa/linux_distro/casapy-${CASAPY_VERSION}-64b.tar.gz
-tar xfz casapy-${CASAPY_VERSION}-64b.tar.gz
-mv casapy-${CASAPY_VERSION}-64b /opt
-ln -s /opt/casapy-${CASAPY_VERSION}-64b /opt/casa
-# export PATH=$PATH:/opt/casa
-
-
-#### LOFAR ####
-## Dependencies
-# NOTE: massif-visualizer required?
-apt-get install -y valgrind libssh2-1-dev libblitz0-dev autogen libpqxx3-dev libpq-dev \
-libunittest++-dev liblog4cplus-dev
-#apt-get install -y nvidia-cuda-dev
-
-## DAL (temporally disabled)
+# apt-get install -y libgsl0-dev xvfb
+# cd
+# CASAPY_VERSION=42.1.29047-001-1
+# wget https://svn.cv.nrao.edu/casa/linux_distro/casapy-${CASAPY_VERSION}-64b.tar.gz
+# tar xfz casapy-${CASAPY_VERSION}-64b.tar.gz
+# mv casapy-${CASAPY_VERSION}-64b /opt
+# ln -s /opt/casapy-${CASAPY_VERSION}-64b /opt/casa
+# # export PATH=$PATH:/opt/casa
 
 ## LOFAR
+apt-get install -y valgrind libssh2-1-dev libblitz0-dev autogen libpqxx3-dev libpq-dev \
+libunittest++-dev liblog4cplus-dev
 cd
-#svn co https://svn.astron.nl/LOFAR/trunk LOFAR
-cp -r /vagrant/LOFAR .
-cd LOFAR/CMake
-./gen_LofarPackageList_cmake.sh
-cd ..
+svn co --username "lofar" --password "M_OKZZJBTNuI" --non-interactive https://svn.astron.nl/LOFAR/trunk LOFAR
+cd LOFAR
 mkdir -p build/gnu_opt; cd build/gnu_opt
 mkdir /opt/LofIm
-export LD_LIBRARY_PATH=/usr/local/hdf5/lib:$LD_LIBRARY_PATH
-cmake ../.. -DBUILD_SHARED_LIBS=ON -DCMAKE_INSTALL_PREFIX=/opt/LofIm \
+cmake ../.. -DBUILD_SHARED_LIBS=ON \
+    -DCMAKE_INSTALL_PREFIX=/opt/LofIm \
     -DUSE_OPENMP=ON \
     -DF2PY_FCOMPILER=gnu95 \
-    -DBUILD_PACKAGES=Offline\;LofarFT\;StaticMetaData\;SPW_Combine
+    -DBUILD_PACKAGES=Offline
 make
 make install
+cd
+rm -rf LOFAR
 
 ## Update configuration files
 cat /vagrant/bashrc >> /home/vagrant/.bashrc
-cp /vagrant/casarc /home/vagrant/.casarc
-chown vagrant:vagrant /home/vagrant/.casarc
-
-##Optionally install ipython-notebook and qtconsole
-#apt-get install -y ipython-notebook ipython-qtconsole
-#pip install --upgrade ipython[all]
-
-# LOSOTO
-#apt-get install -y liblzo2-dev
-#pip install --upgrade cython
-#pip install --upgrade numexpr
-#pip install --upgrade tables
-#pip install --upgrade pandas
-
-### Before packaging
-## Manually at the moment
-
-## Clean
-#rm -r casarest casacore-1.5.0 hdf5-1.8.11 LOFAR pyrap-1.1.0
-#rm casapy-stable-41.0.23375-001-64b.tar.gz
-#rm hdf5-1.8.11.tar.gz
-#rm DAL-2.0.32.tar.gz
-
-
-## Upgrade
-# apt-get update
-# apt-get upgrade -y
-## Problem with grub. Manually select the first partition
-
-## Upload the VirtualBox kernel modules
-# /etc/init.d/vboxadd setup
-
-## Clean cache
-# apt-get clean
 
