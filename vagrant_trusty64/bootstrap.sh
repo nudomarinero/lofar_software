@@ -54,7 +54,7 @@ ipython-notebook ipython-qtconsole
 # pip install --upgrade pandas
 # pip install --upgrade ipython
 
-## pyrap
+# pyrap
 apt-get install -y python-pyrap
 
 ## casarest
@@ -65,7 +65,8 @@ apt-get install -y casacore-data
 
 ## LOFAR
 cd
-svn co --username "lofar" --password "M_OKZZJBTNuI" --non-interactive https://svn.astron.nl/LOFAR/trunk LOFAR
+svn co --username "lofar" --password "M_OKZZJBTNuI" --non-interactive \
+https://svn.astron.nl/LOFAR/branches/LOFAR-Release-2_8 LOFAR
 cd LOFAR
 mkdir -p build/gnu_opt; cd build/gnu_opt
 mkdir /opt/LofIm
