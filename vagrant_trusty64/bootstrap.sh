@@ -80,7 +80,7 @@ apt-get install -y casacore-data
 # cd
 # rm -rf LOFAR
 
-wget http://www.roe.ac.uk/~jsm/lofar_dist/trusty/lofar_2.8-1_amd64.deb
-dpkg -i lofar_2.8-1_amd64.deb
+wget http://www.roe.ac.uk/~jsm/lofar_dist/trusty/lofar_2.10-1trusty_amd64.deb
+dpkg -i lofar_2.10-1trusty_amd64.deb
 
 ## Update configuration files

@@ -4,7 +4,7 @@ import os
 ### Configuration
 config = {
     "source_dir" : "/vagrant/package_LOFAR",
-    "version" : "2.8",
+    "version" : "2.10",
     "pkgrelease" : "1trusty"
     }
 ###
