@@ -1,0 +1,134 @@
+---
+- name: Install LOFAR software
+  gather_facts: no
+  hosts: default
+  tasks:
+  - name: update box
+    apt: upgrade=dist update_cache=yes
+    become: True
+  - name: install dependencies
+    apt: pkg={{ item }}
+    become: True
+    with_items:
+      #- fail2ban
+      - gfortran 
+      - cmake 
+      - scons 
+      - fftw3-dev 
+      - flex 
+      - libreadline-dev 
+      - libcfitsio-dev
+      - libxml2-dev 
+      - libpng-dev 
+      - libblas-dev 
+      - liblapack-dev 
+      - bison 
+      - libboost-all-dev
+      - f2c 
+      - zlib1g-dev 
+      - subversion 
+      - libfreetype6-dev 
+      - make 
+      - libncurses5-dev 
+      - git 
+      - libatlas-base-dev
+      - wcslib-dev 
+      - hdf5-tools 
+      - libhdf5-dev 
+      - libhdf5-serial-dev 
+      - build-essential 
+      - libzmq3-dev 
+      - liblzo2-dev 
+      - valgrind 
+      - libssh2-1-dev 
+      - autogen 
+      - libpqxx3-dev 
+      - libpq-dev 
+      - libunittest++-dev
+      - liblog4cplus-dev
+      - libgsl-dev
+      - xvfb
+      - libffi-dev
+      - libssl-dev
+      - software-properties-common
+      - libgeos-dev
+      - libxml++2.6-dev
+      - language-pack-en
+      - s3cmd
+      - htop
+      - montage
+      - pgplot5
+  - name: install Python packages
+    apt: pkg={{ item }}
+    become: True
+    with_items:  
+      - ipython 
+      - python-matplotlib 
+      - python-matplotlib-data 
+      - python-pip 
+      - python-pyfits 
+      - python-numpy 
+      - python-scipy 
+      - python-virtualenv 
+      - python-sphinx
+      - python-pygments 
+      - python-jinja2 
+      - python-nose 
+      - python-tornado 
+      - cython 
+      - python-zmq 
+      - python-gwcs 
+      - python-astropy 
+      - python-numexpr 
+      - python-tables 
+      - python-pandas
+      - python-h5py
+      - jupyter
+      - python-nbconvert
+      - python-nbformat
+      - python-pybind11
+      - python-deap
+      - python-ipdb
+      - python-ephem
+      - python-psutil
+      - python-psycopg2
+      - python-cpuinfo
+      - python-prettytable
+      - python-mysqldb
+  - name: install LOFAR dependencies repository
+    apt_repository: repo='ppa:kernsuite/kern-dev'
+    become: True
+  - name: install LOFAR dependencies
+    apt: pkg={{ item }} update_cache=yes
+    become: True
+    with_items:
+      - libblitz0-dev
+      - casacore-tools
+      - casacore-dev
+      - libcasasynthesis1
+      - libcasasynthesis-dev
+      - python-casacore
+      - casarest
+      - casacore-data
+      - aoflagger
+      - aoflagger-dev
+      - sagecal
+      - lofar-dev
+      - lofar
+      - losoto
+      - lsmtool
+      - msutils
+      - polygon2
+      - prefactor
+      - dysco
+      - dyscostma-dev
+      - factor
+      - python-pymonetdb
+      - python-gsm
+      - pybdsf
+      - meqtrees
+      - python-sharedarray
+      - python-shm
+      - python-pyfftw
+      - owlcat
+      
